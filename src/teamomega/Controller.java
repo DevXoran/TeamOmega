@@ -1,5 +1,6 @@
 package teamomega;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Controller {
@@ -9,26 +10,27 @@ public class Controller {
     
     public Controller(View view, Model model) {
     
-        this.view=view;
-        this.model=model; 
+        this.view = view;
+        this.model = model; 
         
-        this.view.addListener(new ButtonListener());
-}
+        this.view.ButtonListener(new ButtonListener());
+    }
     
-    public void ButtonListener implements ActionListener {
+    private class ButtonListener implements ActionListener {  
         
-        @Override 
-        
+        @Override
         public void actionPerformed(ActionEvent e){
         
-        double zahl;
-                number = view.getNumber();
+            double number = view.getNumber();
                 
-         try {
-             double zahl = model.doAddition(zahl); 
-             view.setSolution(number);
-         }
+            try {
+                double zahl = model.doAddition(number); 
+                view.setSolution(zahl);
+              
+            } catch (Exception ex) {
+                
+                view.displayError();
+            }
+        }   
     }
-    }
-
 }
